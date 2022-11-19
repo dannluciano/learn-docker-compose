@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: "traefik:v2.6"
+    image: "traefik"
     command:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
