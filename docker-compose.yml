@@ -20,6 +20,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`localhost`)"
       - "traefik.http.routers.whoami.entrypoints=web,websecure"
+      # echo $(htpasswd -nb user password) | sed -e s/\\$/\\$\\$/g
+      - "traefik.http.middlewares.whoami-auth.basicauth.users=dannluciano:$$apr1$$tqZfq6IJ$$2lY8ALYcEvuwejvfQPadp."
+      - "traefik.http.routers.whoami.middlewares=whoami-auth"
   nginx:
     image: "nginxdemos/hello"
     scale: 1
