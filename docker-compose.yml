@@ -51,3 +51,11 @@ services:
       - "traefik.http.routers.front.entrypoints=web"
     volumes:
       - "./front:/app"
+  back:
+    build: ./back/
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.back.rule=Host(`localhost`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.back.entrypoints=web"
+    volumes:
+      - "./back:/app"
