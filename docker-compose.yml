@@ -36,4 +36,10 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nginx.rule=Host(`localhost`) && Path(`/nginx`)"
-      - "traefik.http.routers.nginx.entrypoints=web"
+      - "traefik.http.routers.nginx.entrypoints=web"  nginx-plain:
+    image: nginxdemos/hello:plain-text
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx-plain.rule=Host(`localhost`) && Path(`/plain`)"
+      - "traefik.http.routers.nginx-plain.entrypoints=web"
+  front:
