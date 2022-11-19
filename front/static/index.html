@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello World</h1>
+
+    <div id="consoleField"></div>
+
+    <footer>
+        <p>
+           Feito por dannluciano
+        </p>
+    </footer>
+
+    <script>
+        const consoleField = document.getElementById('consoleField')
+        fetch('http://localhost/api')
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function(data) {
+                consoleField.innerText = consoleField.innerText + JSON.stringify(data) + "\n"
+            })
+            .catch(function(error){
+                console.error(error)
+            })
+    </script>
+</body>
+
+</html>
