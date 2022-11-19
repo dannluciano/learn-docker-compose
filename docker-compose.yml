@@ -7,6 +7,11 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.email=dannluciano@gmail.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
       - "--accesslog=true"
     ports:
       - "80:80"
@@ -14,12 +19,14 @@ services:
       - "443:443"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
   whoami:
     image: "traefik/whoami"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.whoami.rule=Host(`localhost`)"
       - "traefik.http.routers.whoami.entrypoints=web,websecure"
+      - "traefik.http.routers.whoami.tls.certresolver=myresolver"
       # echo $(htpasswd -nb user password) | sed -e s/\\$/\\$\\$/g
       - "traefik.http.middlewares.whoami-auth.basicauth.users=dannluciano:$$apr1$$tqZfq6IJ$$2lY8ALYcEvuwejvfQPadp."
       - "traefik.http.routers.whoami.middlewares=whoami-auth"
