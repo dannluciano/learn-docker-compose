@@ -59,3 +59,17 @@ services:
       - "traefik.http.routers.back.entrypoints=web"
     volumes:
       - "./back:/app"
+    environment:
+      - POSTGRES_DB=learn-docker 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=database
+    depends_on:
+      - database
+  database:
+    image: postgres:alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=learn-docker 
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
