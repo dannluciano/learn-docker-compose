@@ -72,6 +72,7 @@ services:
     environment:
       - POSTGRES_DB=learn-docker
       - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
   prometheus:
     image: prom/prometheus
     ports:
